@@ -1,9 +1,3 @@
-# dans prospect-ia/
-echo ".env" >> .gitignore
-echo "__pycache__/" >> .gitignore
-echo "node_modules/" >> .gitignore
-
-
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
