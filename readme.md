@@ -143,4 +143,4 @@ prospect-ia/
 
 **Lerik** — Développeur Web & Intégrateur Solutions IA
 
-[LinkedIn](#) · [GitHub](#)
+[LinkedIn](https://www.linkedin.com/in/tarikbouari/) · [GitHub](https://github.com/tarikbouari/prospect_ia)
