@@ -1,56 +1,53 @@
-# Prospect-IA 🤖
+# Solis 🤖
 
-> Générateur de messages de prospection B2B ultra-personnalisés, propulsé par l'IA.
-> Adaptés à chaque canal : LinkedIn, Email, Instagram DM, Plan Commercial, Twitter/X.
+> La structure d'une entreprise, le travail d'une seule personne.
+
+Solis est une plateforme d'agents IA qui aide les solopreneurs à structurer et faire avancer leur activité — en préparant le travail à leur place, tout en leur laissant le contrôle sur chaque décision qui compte.
+
+**Live** → [solis-delta-dusky.vercel.app](https://solis-delta-dusky.vercel.app)
 
 ---
 
 ## Le problème
 
-La prospection B2B prend un temps fou. Envoyer des messages génériques ne fonctionne plus — il faut personnaliser chaque approche. Faire ça manuellement pour 50 prospects par jour est impossible.
+Un solopreneur porte seul tous les rôles d'une entreprise : commercial, stratège, community manager, gestionnaire administratif. Ce n'est pas le travail qui pose problème — c'est tout ce qu'il y a autour : décider chaque matin par où commencer, relancer ses prospects, rester visible en ligne, gérer devis et factures.
+
+Résultat : beaucoup d'entrepreneurs solo avancent au feeling, perdent des clients faute de suivi, et plafonnent — non par manque de compétence, mais par manque de structure.
 
 ## La solution
 
-Prospect-IA analyse automatiquement le site web d'un prospect et génère en quelques secondes un message de prospection personnalisé, adapté au canal de diffusion choisi.
+Solis reproduit, pour une personne seule, l'organisation qu'apporterait une petite équipe. Un système qui prépare le travail en continu, pendant que l'entrepreneur garde la main sur chaque décision qui compte.
 
 ---
 
-## Démo — 4 étapes
+## Les 5 piliers
+
+| Pilier | Statut | Ce qu'il fait |
+|---|---|---|
+| 🎯 **Prospection** | ✅ Live | Messages personnalisés générés à partir du site du prospect, prêts à envoyer |
+| ✍️ **Contenu** | 🔜 V2 | Posts et formats générés à partir des idées de l'entrepreneur |
+| 🧭 **Stratégie** | 🔜 V3 | Priorités du jour proposées selon l'activité réelle |
+| 📅 **Organisation** | 🔜 V4 | Planning ajusté automatiquement face aux imprévus |
+| 📋 **Relation client** | 🔜 V4 | Devis, factures et relances préparés en un clic |
+
+---
+
+## Pilier Prospection — Live ✅
+
+L'agent analyse automatiquement le site web d'un prospect et génère un message de prospection ultra-personnalisé, adapté au canal choisi.
+
+### Démo — 4 étapes
 
 ```
 1. Colle l'URL du site prospect
-2. Choisis ton canal (LinkedIn, Email, Instagram, Plan Commercial, Twitter)
+2. Choisis ton canal (LinkedIn, Email, Instagram, Plan Commercial, Twitter/X)
 3. Décris ton offre en quelques mots
 4. Reçois un message prêt à envoyer — modifiable et copiable en 1 clic
 ```
 
----
+**Essayer →** [solis-delta-dusky.vercel.app/prospect-ia](https://solis-delta-dusky.vercel.app/prospect-ia)
 
-## Stack technique
-
-| Couche | Technologie |
-|---|---|
-| Frontend | Next.js 14, Tailwind CSS |
-| Backend | Python, FastAPI |
-| IA | OpenAI GPT-4o-mini |
-| Scraping | requests, BeautifulSoup4 |
-
----
-
-## Architecture
-
-```
-[Next.js :3000]
-      ↕  POST /generate { url, services, channel }
-[FastAPI :8000]
-      ↕
-[prospect_ia.py]
-   scraping → prompt dynamique → OpenAI → message adapté au canal
-```
-
----
-
-## Canaux supportés
+### Canaux supportés
 
 | Canal | Format | Longueur |
 |---|---|---|
@@ -62,11 +59,43 @@ Prospect-IA analyse automatiquement le site web d'un prospect et génère en que
 
 ---
 
-## Installation
+## Architecture
+
+```
+[Next.js — Vercel]
+        ↕  POST /generate { url, services, channel }
+[FastAPI — Render]
+        ↕
+[Agent LangChain]
+   @tool scrape_site → prompt dynamique → OpenAI GPT-4o-mini → message
+```
+
+### Principe directeur
+
+- **Automatique** — ce qui est répétitif et sans risque
+- **Préparé + validé** — ce qui touche à l'image ou à l'argent (messages, devis, contenu)
+- **Décision humaine** — la direction stratégique, toujours
+
+---
+
+## Stack technique
+
+| Couche | Technologie |
+|---|---|
+| Frontend | Next.js 16, Tailwind CSS |
+| Backend | Python, FastAPI |
+| Agent IA | LangChain, OpenAI GPT-4o-mini |
+| Scraping | requests, BeautifulSoup4 |
+| Deploy Frontend | Vercel |
+| Deploy Backend | Render |
+
+---
+
+## Installation locale
 
 ### Prérequis
 
-- Python 3.10+
+- Python 3.11+
 - Node.js 18+
 - Une clé API OpenAI
 
@@ -99,46 +128,33 @@ npm run dev
 
 ---
 
-## Utilisation
-
-1. Lance le backend → `http://localhost:8000`
-2. Lance le frontend → `http://localhost:3000`
-3. Ouvre `http://localhost:3000` dans ton navigateur
-4. Suis les 4 étapes et copie ton message
-
----
-
 ## Structure du projet
 
 ```
-prospect-ia/
+solis/
 ├── .gitignore
 ├── README.md
 ├── backend/
-│   ├── prospect_ia.py    # scraping + génération multicanal
+│   ├── prospect_ia.py    # agent LangChain — scraping + génération multicanal
 │   ├── main.py           # API FastAPI
 │   ├── requirements.txt  # dépendances Python
 │   └── .env              # clé OpenAI (ne pas committer !)
 └── frontend/
-    └── app/
-        └── page.tsx      # interface utilisateur 4 étapes
+    ├── app/
+    │   ├── page.tsx           # landing page Solis
+    │   └── prospect-ia/
+    │       └── page.tsx       # outil Prospection IA
+    └── components/
+        └── landing.tsx        # composant landing
 ```
 
 ---
 
-## Roadmap
 
-- [x] MVP — scraping + génération de message
-- [x] Interface Next.js 4 étapes
-- [x] API FastAPI
-- [x] Support multicanal (LinkedIn, Email, Instagram, Plan Commercial, Twitter)
-- [ ] Génération en masse (import CSV de 50 prospects)
-- [ ] Historique des messages générés
-- [ ] Authentification utilisateur
-- [ ] Deploy production (Vercel + Railway)
 
----
 
+
+*Solis est développé par TRB Consulting — Fait pour les solopreneurs.*
 ## Auteur
 
 **Lerik** — Développeur Web & Intégrateur Solutions IA
