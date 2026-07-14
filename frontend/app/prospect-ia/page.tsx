@@ -21,7 +21,7 @@ const STEPS = [
   { id: 4, key: "result",  label: "04_MESSAGE" },
 ];
 
-function extractDomain(url) {
+function extractDomain(url: string) {
   try {
     const u = new URL(url.startsWith("http") ? url : `https://${url}`);
     return u.hostname.replace("www.", "");
@@ -30,7 +30,7 @@ function extractDomain(url) {
   }
 }
 
-async function generateMessage({ url, services, channel }) {
+async function generateMessage({ url, services, channel }: { url: string; services: string; channel: string }){
   const response = await fetch("https://prospect-ia.onrender.com/", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
