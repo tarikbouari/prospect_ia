@@ -8,9 +8,13 @@ from prospect_ia import run
 
 app = FastAPI()
 
+# Après
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://solis-delta-dusky.vercel.app/"],
+    allow_origins=[
+        "http://localhost:3000",
+        "https://solis-delta-dusky.vercel.app",
+    ],
     allow_methods=["POST"],
     allow_headers=["*"],
 )
