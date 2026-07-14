@@ -31,7 +31,7 @@ function extractDomain(url: string) {
 }
 
 async function generateMessage({ url, services, channel }: { url: string; services: string; channel: string }){
-  const response = await fetch("https://prospect-ia.onrender.com/", {
+  const response = await fetch("https://prospect-ia.onrender.com/generate", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ url, services, channel }),
